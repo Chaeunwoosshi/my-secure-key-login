@@ -3,10 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Secure Key Login Script</title>
-    <script src="https://chaeunwoosshi.github.io/my-secure-key-login/script.js"></script> <!-- External JS file -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+        }
+        .container {
+            position: relative;
+            background-color: #1c1c1c;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .header {
+            background-image: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjznrDv70xST0cLoojONDJiyYhDbCwntQLNcyLWn0rEthzZUd9tqcG7P_EHHcw8dG397r3HqNI8VXPYdgqaqAD2ojd7AfhJKhc2MFL73pMAZxoKm85dOmkvN2bXXcngib4DXBT3LomvQctyRupTVAK_hgqAehgKsOMHipRqwaHNvaUwGX8w79EHJMdxalC0/s2018/Picsart_24-11-13_17-26-57-759.jpg");
+            background-size: cover;
+            width: 100%;
+            height: 200px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .header h1, .header .subscriber-link, .header .profile-icon {
+            position: relative;
+            z-index: 2;
+        }
+        .subscriber-link {
+            color: #3b82f6;
+            background-color: #e0f2ff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .profile-icon img {
+            width: 120px;
+            height: 33px;
+            margin-top: 15px;
+        }
+        .plan-section {
+            padding: 20px;
+            text-align: left;
+        }
+        .plan-card {
+            background-color: #62f4af86;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            margin-top:10px;
+        }
+        .access-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #1ad565;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .access-button:hover{
+        background-color: #12943f;  
+        }
+        .key-input-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .key-button {
+            padding: 10px 15px;
+            background-color: #1ad565;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .key-button:hover {
+            background-color: #12943f;
+        }
+        .key-input-container input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .modal-content {
+            background-color: #222;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .modal-close {
+            background-color: #92a99a;
+            color: white;
+            position: absolute;
+            top:10px;
+            left:10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+      .qr{
+        width:80%;
+        margin-top:5px;
+      }
+    </style>
 </head>
 <body>
-    <p>Script is loaded successfully.</p> <!-- This is optional, for testing purposes -->
+<div class="mylogin">
+    <div class="container">
+        <div class="header">
+            <div class="profile-icon">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiSfXP2mrgzCN_WWKM7eCu0qB8Xc6cLpZtEItBwsUJqBWtuu0qP39J2l4lCyjJyhPw1Li9dXGbwWIIn658Y1Z9521C3LMCopwoX4v3EQKocpDQhs3WvF5SaN7CA3isUt5w_OiQ8Ji0xEp3kMsNE0FTYX51mjQvOlfqGdwMqLXx2Rtb3uAox1DAQlfcfpKA=w800" alt="Profile Icon">
+            </div>
+            <h1>Short Drama</h1>
+            <a href="#" class="subscriber-link">Already a subscriber?</a>
+        </div>
+        
+        <div class="plan-section">
+            <h2>Enter Key</h2>
+            <div class="key-input-container">
+                <input type="text" id="access-key" placeholder="Enter your key" onkeypress="checkEnter(event)" style="padding: 10px; width: 90%; border-radius: 5px; border: 1px solid #ccc;">
+                <button class="key-button" onclick="validateKey()">Proceed</button>
+            </div>
+            <p id="login-status" style="color: #f00; font-size: 14px; margin-top: 10px;"></p>
+        </div>
+
+        <div class="plan-section">
+            <h2>Get Key</h2>
+            <div class="plan-card">
+                <h3>Lifetime Plan</h3>
+                <div class="price">PHP500.00</div>
+                <div class="benefits">
+                    <img src="https://img.icons8.com/?size=96&id=DFR1DqKKfKYb&format=png" alt="Icon" width="35">
+                    <span>Short Drama Access<br>Access to the APP</span>
+                </div>
+                <div class="access-button" onclick="showModal()">Get Instant Access</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+     <br/><br/><br/>
+            <h2>Purchase Lifetime Access</h2><br/><br/>
+            <p>Through Gcash Only</p>
+          <br/>
+            <p>Scan the QR Code below to pay and send receipt to ADMIN</p>
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpYyBQkoD6nvcFANSXo2NO_9e2ga0s7gisZhaO4RDxE5hxIpAKTIAia7DSH_r1U9jrY7hZFQmTVdPEfYxrGap5UJXr-du278HlvsNZfLKL8My4Bp3bLJw_wT81_SEVI3YX04d7Nu52qC6W6JRlmRSV-1wQ2lDKKH4RROu2EcoBYW4i903YsNsBRYhGPR1w/s1677/Picsart_24-11-13_19-16-06-796.png" download >
+   <img class="qr" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpYyBQkoD6nvcFANSXo2NO_9e2ga0s7gisZhaO4RDxE5hxIpAKTIAia7DSH_r1U9jrY7hZFQmTVdPEfYxrGap5UJXr-du278HlvsNZfLKL8My4Bp3bLJw_wT81_SEVI3YX04d7Nu52qC6W6JRlmRSV-1wQ2lDKKH4RROu2EcoBYW4i903YsNsBRYhGPR1w/s1677/Picsart_24-11-13_19-16-06-796.png">
+
+</a>
+
+           
+            <button class="modal-close" onclick="hideModal()">Back</button>
+        </div>
+    </div>
+</div>
+  
+
+
+<script>
+    function showModal() {
+        document.getElementById('modal').style.display = 'flex';
+    }
+    function hideModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+</script>
+
+<script src="https://chaeunwoosshi.github.io/my-secure-key-login/script.js"></script>
+
 </body>
 </html>
