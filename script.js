@@ -1,4 +1,4 @@
-<script>
+
 document.addEventListener("DOMContentLoaded", function () {
     function checkEnter(event) {
         if (event.key === "Enter") {
@@ -51,4 +51,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 });
-</script>
+
