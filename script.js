@@ -1,4 +1,11 @@
-<script>
+function showModal() {
+        document.getElementById('modal').style.display = 'flex';
+    }
+    function hideModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+    
+
     function checkEnter(event) {
         if (event.key === "Enter") {
             validateKey();
@@ -50,4 +57,4 @@
             document.querySelector(".mylogin").style.display = "none"; // Hide the login section if cookie exists
         }
     };
-</script>
+
