@@ -1,5 +1,4 @@
-
-document.addEventListener("DOMContentLoaded", function () {
+<script>
     function checkEnter(event) {
         if (event.key === "Enter") {
             validateKey();
@@ -24,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             loginStatus.style.color = "#f00";
         }
     }
+
 
     // Function to set a permanent cookie
     function setCookie(name, value) {
@@ -50,5 +50,4 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".mylogin").style.display = "none"; // Hide the login section if cookie exists
         }
     };
-});
-
+</script>
