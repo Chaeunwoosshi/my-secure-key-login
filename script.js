@@ -18,7 +18,7 @@ function validateKey() {
     const myLoginDiv = document.querySelector(".mylogin");
 
     // Array of valid keys
-    const validKeys = ["KEY2", "KEY3", "KEY4"]; // Add as many keys as you need
+    const validKeys = ["KEY3", "KEY4"]; // Add as many keys as you need
 
     if (validKeys.includes(key)) {
         loginStatus.textContent = "Access granted!";
