@@ -18,7 +18,7 @@ function validateKey() {
     const myLoginDiv = document.querySelector(".mylogin");
 
     // Array of valid keys
-    const validKeys = ["KEY4", "KEY5"]; // Add as many keys as you need
+    const validKeys = ["KEY5"]; // Add as many keys as you need
 
     if (validKeys.includes(key)) {
         loginStatus.textContent = "Access granted!";
@@ -57,7 +57,7 @@ function getCookie(name) {
 // On page load, check if the access key cookie exists and validate it
 window.onload = function() {
     const accessKey = getCookie("accessKey");
-    const validKeys = ["KEY4", "KEY5"]; // Current valid keys
+    const validKeys = [ "KEY5"]; // Current valid keys
 
     if (accessKey && validKeys.includes(accessKey)) {
         document.querySelector(".mylogin").style.display = "none"; // Hide login section if key is still valid
