@@ -18,7 +18,7 @@ function validateKey() {
     const myLoginDiv = document.querySelector(".mylogin");
 
     // Array of valid keys
-    const validKeys = ["KEY3", "KEY4"]; // Add as many keys as you need
+    const validKeys = ["KEY2", "KEY3", "KEY4"]; // Add as many keys as you need
 
     if (validKeys.includes(key)) {
         loginStatus.textContent = "Access granted!";
@@ -37,6 +37,11 @@ function setCookie(name, value) {
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
+// Function to delete a cookie by name
+function deleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
 // Function to get a cookie by name
 function getCookie(name) {
     let nameEQ = name + "=";
@@ -52,7 +57,7 @@ function getCookie(name) {
 // On page load, check if the access key cookie exists and validate it
 window.onload = function() {
     const accessKey = getCookie("accessKey");
-    const validKeys = ["KEY3", "KEY4"]; // Current valid keys
+    const validKeys = ["KEY2", "KEY3", "KEY4"]; // Current valid keys
 
     if (accessKey && validKeys.includes(accessKey)) {
         document.querySelector(".mylogin").style.display = "none"; // Hide login section if key is still valid
@@ -61,6 +66,6 @@ window.onload = function() {
         document.querySelector(".mylogin").style.display = "flex";
         document.getElementById("login-status").textContent = "Access denied. Key is no longer valid.";
         document.getElementById("login-status").style.color = "#f00";
-        setCookie("accessKey", "", -1); // Clear the invalid cookie
+        deleteCookie("accessKey"); // Clear the invalid cookie
     }
 };
